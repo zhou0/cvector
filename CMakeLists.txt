@@ -38,7 +38,7 @@
 cmake_minimum_required (VERSION 3.5)
 
 project (CVector C)
-set(CV_APIVERS,"2.0.1")
+set(CV_APIVERSION 2.0.1)
 
 #
 # Environment Variables
@@ -111,6 +111,7 @@ set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${CV__LIB}")
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${CV__LIB}")
 add_library(CV_static STATIC ${CV__SRC}/CVector.c)
 set_target_properties(CV_static PROPERTIES OUTPUT_NAME "CVector")
+set_target_properties(CV_static PROPERTIES CLEAN_DIRECT_OUTPUT 1)
 set_target_properties(CV_static PROPERTIES LINKER_LANGUAGE C)
 set_target_properties(CV_static PROPERTIES SOVERSION "${CV_APIVERSION}")
 set(CV_STATIC_LIBRARY_PATH ${CV__LIB}/libCVector${CMAKE_STATIC_LIBRARY_SUFFIX})
@@ -120,9 +121,10 @@ set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${CV__LIB}")
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${CV__LIB}")
 add_library(CV_shared SHARED  ${CV__SRC}/CVector.c)
 set_target_properties(CV_shared PROPERTIES OUTPUT_NAME "CVector")
+set_target_properties(CV_shared PROPERTIES CLEAN_DIRECT_OUTPUT 1)
 set_target_properties(CV_shared PROPERTIES LINKER_LANGUAGE C)
 set_target_properties(CV_shared PROPERTIES SOVERSION "${CV_APIVERSION}")
-set(CV_SHARED_LIBRARY_PATH ${CV__LIB}/libCVector.${CMAKE_SHARED_LIBRARY_SUFFIX})
+set(CV_SHARED_LIBRARY_PATH ${CV__LIB}/libCVector${CMAKE_SHARED_LIBRARY_SUFFIX})
 
 
 #
