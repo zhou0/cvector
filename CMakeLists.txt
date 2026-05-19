@@ -39,6 +39,7 @@ cmake_minimum_required (VERSION 3.5)
 
 project (CVector C)
 set(CV_APIVERSION 2.0.1)
+option(BUILD_STATIC_LIBS "Build static libraries" OFF)
 
 #
 # Environment Variables
@@ -109,12 +110,14 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CV__BIN}")
 
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${CV__LIB}")
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${CV__LIB}")
+if(BUILD_STATIC_LIBS)
 add_library(CV_static STATIC ${CV__SRC}/CVector.c)
 set_target_properties(CV_static PROPERTIES OUTPUT_NAME "CVector")
 set_target_properties(CV_static PROPERTIES CLEAN_DIRECT_OUTPUT 1)
 set_target_properties(CV_static PROPERTIES LINKER_LANGUAGE C)
 set_target_properties(CV_static PROPERTIES SOVERSION "${CV_APIVERSION}")
 set(CV_STATIC_LIBRARY_PATH ${CV__LIB}/libCVector${CMAKE_STATIC_LIBRARY_SUFFIX})
+endif(BUILD_STATIC_LIBS)
 
 
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${CV__LIB}")
@@ -124,6 +127,7 @@ set_target_properties(CV_shared PROPERTIES OUTPUT_NAME "CVector")
 set_target_properties(CV_shared PROPERTIES CLEAN_DIRECT_OUTPUT 1)
 set_target_properties(CV_shared PROPERTIES LINKER_LANGUAGE C)
 set_target_properties(CV_shared PROPERTIES SOVERSION "${CV_APIVERSION}")
+set_target_properties(CV_shared PROPERTIES WINDOWS_EXPORT_ALL_SYMBOLS ON)
 set(CV_SHARED_LIBRARY_PATH ${CV__LIB}/libCVector${CMAKE_SHARED_LIBRARY_SUFFIX})
 
 
@@ -142,14 +146,16 @@ endmacro()
 
 
 add_executable(CVectorBasicTest "${CV__EXAMPLES}/CVectorBasicTest.c")
-set_target_properties(CVectorBasicTest PROPERTIES LINK_LIBRARIES CV_static)
+set_target_properties(CVectorBasicTest PROPERTIES LINK_LIBRARIES CV_shared)
 
 #
 # install
 #
 
 install (TARGETS CVectorBasicTest DESTINATION bin)
-install (TARGETS CV_static DESTINATION lib)
+if(BUILD_STATIC_LIBS)
+  install (TARGETS CV_static DESTINATION lib)
+endif(BUILD_STATIC_LIBS)
 install (TARGETS CV_shared DESTINATION lib)
 
 #

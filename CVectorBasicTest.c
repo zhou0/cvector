@@ -57,8 +57,12 @@ int main(int argc, char **argv) {
     out = stdout;
     
     if (argc > 1) {
-        out = fopen(argv[1],"w+");
+#ifdef _WIN32
+        if (fopen_s(&out, argv[1], "w+")) {
+#else
+        out = fopen(argv[1], "w+");
         if (!out) {
+#endif
             fprintf(stderr," Failed to open output file %s\n", argv[1]);
             exit(1);
         }
