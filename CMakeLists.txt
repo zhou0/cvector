@@ -127,6 +127,7 @@ set_target_properties(CV_shared PROPERTIES OUTPUT_NAME "CVector")
 set_target_properties(CV_shared PROPERTIES CLEAN_DIRECT_OUTPUT 1)
 set_target_properties(CV_shared PROPERTIES LINKER_LANGUAGE C)
 set_target_properties(CV_shared PROPERTIES SOVERSION "${CV_APIVERSION}")
+set_target_properties(CV_shared PROPERTIES WINDOWS_EXPORT_ALL_SYMBOLS ON)
 set(CV_SHARED_LIBRARY_PATH ${CV__LIB}/libCVector${CMAKE_SHARED_LIBRARY_SUFFIX})
 
 
