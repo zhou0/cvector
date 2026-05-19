@@ -1,2 +1,0 @@
-/usr/bin/ar qc lib/libCVector.a CMakeFiles/CV_static.dir/CVector.c.o
-/usr/bin/ranlib lib/libCVector.a
