@@ -1,0 +1,39 @@
+<<<<<<< SEARCH
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "")
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "")
+add_library(CV_static STATIC ${CV__SRC}/CVector.c)
+set_target_properties(CV_static PROPERTIES OUTPUT_NAME "CVector")
+set_target_properties(CV_static PROPERTIES CLEAN_DIRECT_OUTPUT 1)
+set_target_properties(CV_static PROPERTIES LINKER_LANGUAGE C)
+set_target_properties(CV_static PROPERTIES SOVERSION "${CV_APIVERSION}")
+set(CV_STATIC_LIBRARY_PATH ${CV__LIB}/libCVector${CMAKE_STATIC_LIBRARY_SUFFIX})
+=======
+if(BUILD_STATIC_LIBS)
+  set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${CV__LIB}")
+  set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${CV__LIB}")
+  add_library(CV_static STATIC ${CV__SRC}/CVector.c)
+  set_target_properties(CV_static PROPERTIES OUTPUT_NAME "CVector")
+  set_target_properties(CV_static PROPERTIES CLEAN_DIRECT_OUTPUT 1)
+  set_target_properties(CV_static PROPERTIES LINKER_LANGUAGE C)
+  set_target_properties(CV_static PROPERTIES SOVERSION "${CV_APIVERSION}")
+  set(CV_STATIC_LIBRARY_PATH ${CV__LIB}/libCVector${CMAKE_STATIC_LIBRARY_SUFFIX})
+endif(BUILD_STATIC_LIBS)
+>>>>>>> REPLACE
+<<<<<<< SEARCH
+add_executable(CVectorBasicTest "${CV__EXAMPLES}/CVectorBasicTest.c")
+set_target_properties(CVectorBasicTest PROPERTIES LINK_LIBRARIES CV_static)
+=======
+add_executable(CVectorBasicTest "${CV__EXAMPLES}/CVectorBasicTest.c")
+set_target_properties(CVectorBasicTest PROPERTIES LINK_LIBRARIES CV_shared)
+>>>>>>> REPLACE
+<<<<<<< SEARCH
+install (TARGETS CVectorBasicTest DESTINATION bin)
+install (TARGETS CV_static DESTINATION lib)
+install (TARGETS CV_shared DESTINATION lib)
+=======
+install (TARGETS CVectorBasicTest DESTINATION bin)
+if(BUILD_STATIC_LIBS)
+  install (TARGETS CV_static DESTINATION lib)
+endif(BUILD_STATIC_LIBS)
+install (TARGETS CV_shared DESTINATION lib)
+>>>>>>> REPLACE

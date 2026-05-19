@@ -87,7 +87,7 @@ INCLUDES = -I$(INC)
 endif
 
 COMPILE_COMMAND        =  $(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(INCLUDES) $(WARNINGS) -c
-LIBRARY_LINK_COMMAND   =  $(LIBTOOL) --tag=CC --mode=link  $(CC) -version-info $(VERSION) -release $(RELEASE) -no-undefined -rpath $(CVECTOR_PREFIX)/lib
+LIBRARY_LINK_COMMAND   =  $(LIBTOOL) --tag=CC --mode=link  $(CC) -version-info $(VERSION) -release $(RELEASE) -no-undefined -rpath $(CVECTOR_PREFIX)/lib -shared
 BUILD_COMMAND_LOCAL    =  $(LIBTOOL) --tag=CC --mode=link $(CC) $(CFLAGS) $(INCLUDES)
 BUILD_COMMAND_DYNAMIC  =  $(LIBTOOL) --tag=CC --mode=link $(CC) $(CFLAGS) -shared -I $(CVECTOR_PREFIX)/include
 BUILD_COMMAND_STATIC   =  $(LIBTOOL) --tag=CC --mode=link $(CC) $(CFLAGS) -static -I $(CVECTOR_PREFIX)/include
